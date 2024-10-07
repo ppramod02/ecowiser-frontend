@@ -1,14 +1,8 @@
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
+@import url("https://api.fontshare.com/v2/css?f[]=satoshi@300,400,500,700,900&display=swap");
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
 html,
 body {
@@ -17,9 +11,6 @@ body {
 }
 
 body {
-  color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -35,8 +26,22 @@ a {
   text-decoration: none;
 }
 
-@media (prefers-color-scheme: dark) {
-  html {
-    color-scheme: dark;
-  }
+.loader .bravo { animation-delay: 200ms; }
+.loader .charlie { animation-delay: 400ms; }
+
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(0 0 0 / 0.4);
+  border-radius: 50vw;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(0 0 0 / 0.6);
 }
