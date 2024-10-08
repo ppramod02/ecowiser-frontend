@@ -4,7 +4,7 @@ export default function getUrl(route) {
     if(env == "development"){
       return 'http://127.0.0.1:8000/' + route;
     } else {
-     return 'https://ecowiser-server.onrender.com/' + route;
+     return 'https://ecowiser-server-1.onrender.com/' + route;
     }
 }
 
