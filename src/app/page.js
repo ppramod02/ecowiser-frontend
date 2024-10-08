@@ -14,7 +14,6 @@ export default function Home() {
           <HiMiniRocketLaunch color='white' />
         </Link>
       </div>
-
     </div>
   );
 }

@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { useParams, useRouter } from "next/navigation";
 import { Formik } from "formik";
 import { useUser } from "@/contexts/UserContext";
+import toast from "react-hot-toast";
 import getUrl from "@/app/api_url";
 
 export default function EditProduct() {
@@ -26,7 +27,11 @@ export default function EditProduct() {
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(payload)
             });
-            router.push('/home/dashboard');
+            
+            if(res.ok) {
+                toast.success('Brand updated successfully.');
+                router.push('/home/dashboard');
+            }
         } catch (error) {
             console.error(error.message);
         }

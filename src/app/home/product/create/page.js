@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import { Formik } from "formik";
 import { useUser } from "@/contexts/UserContext";
 import getUrl from "@/app/api_url";
+import toast from "react-hot-toast";
 
 export default function CreateProduct() {
     const [ brands, setBrands ] = useState();
@@ -27,7 +28,11 @@ export default function CreateProduct() {
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(payload)
             });
-            router.push('/home/dashboard');
+            
+            if(res.ok) {
+                toast.success('Product created successfully');
+                router.push('/home/dashboard');
+            }
         } catch (error) {
             console.error(error.message);
         }

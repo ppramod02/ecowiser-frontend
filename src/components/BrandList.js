@@ -1,9 +1,13 @@
 import { FaPencil, FaPlus } from "react-icons/fa6"
 import { FaTrashAlt } from "react-icons/fa";
 import Link from "next/link";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
+import Modal from "./Modal";
+import toast from "react-hot-toast";
 
 export default function BrandList({ brands, setBrands }) {
+    const [ modalOpen, setModalOpen ] = useState(false);
+    const [ brandId, setBrandId ] = useState(-1);
 
     const handleDelete = async ( id ) => {
         try {
@@ -13,23 +17,25 @@ export default function BrandList({ brands, setBrands }) {
                 method: 'DELETE',
                 headers: { 'Content-Type': 'application/json' },
             });
-            const data = await res.json();
+            if(res.ok) {
+                toast.success('Brand deleted successfully');
+            }
+
         } catch (error) {
             console.error(error.message);
         }
+        setModalOpen(false);
+        setBrandId(-1);
     }
 
     return (
         <div className='brand-list w-full flex flex-col gap-4'>
-            <div className='flex items-center justify-between'>
-                <h4 className='text-md font-medium'>Your Brands</h4>
-                <button className=''>
-                    <Link href='/home/brand/create' className='px-2 py-1 flex items-center gap-2 font-medium bg-green-400 text-white dark:text-black rounded-md'>
-                        <FaPlus />
-                        Create
-                    </Link>
-                </button>
-            </div>
+            <Modal 
+            isOpen={ modalOpen } 
+            setIsOpen={ setModalOpen } 
+            modalText='Are you sure you want to delete?'
+            buttonText='Delete'
+            action={ handleDelete } />
             {
                 brands.map((brand, idx) => {
                     return (
@@ -42,12 +48,25 @@ export default function BrandList({ brands, setBrands }) {
                                     <p className='hidden md:block'>Edit</p>
                                 </Link>
                             </button>
-                            <button className='text-red-400 p-2' onClick={ () => handleDelete(brand.id) }>
+                            <button className='text-red-400 p-2' onClick={ () => { 
+                                setModalOpen(true); 
+                                setBrandId(brand.id); 
+                            } }>
                                 <Link href='/home/dashboard' className='flex gap-2 items-center'>
                                     <FaTrashAlt />
                                     <p className='hidden md:block'>Delete</p>
                                 </Link>
                             </button>
+                            {
+                                brandId === brand.id && (
+                                    <Modal 
+                                    isOpen={ modalOpen } 
+                                    setIsOpen={ setModalOpen } 
+                                    modalText='Are you sure you want to delete?'
+                                    buttonText='Delete'
+                                    action={ () => handleDelete(brand.id) } />
+                                )
+                            }
                         </div>
                     )
                 })

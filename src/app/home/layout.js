@@ -2,9 +2,8 @@
 
 import { useSelectedLayoutSegment } from "next/navigation";
 import { useUser } from "@/contexts/UserContext";
-import { useEffect } from "react";
 import Link from "next/link";
-import { FaUser, FaUserAstronaut } from "react-icons/fa6";
+import { FaUserAstronaut } from "react-icons/fa6";
 
 
 export default function HomeLayout({ children }) {

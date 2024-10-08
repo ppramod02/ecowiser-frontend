@@ -23,7 +23,10 @@ export default function CreateBrand() {
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(payload)
             });
-            router.push('/home/dashboard');
+            if(res.ok) {
+                toast.success('Brand created successfully.');
+                router.push('/home/dashboard');
+            }
         } catch (error) {
             console.error(error.message);
         }

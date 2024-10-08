@@ -2,12 +2,12 @@ import Link from "next/link";
 
 export default function Product({ product }) {
     return (
-        <div className='product w-fit p-3 flex flex-col justify-center gap-2 border border-black dark:border-slate-500 rounded-lg'>
+        <div className='product w-5/12 md:w-fit p-3 flex flex-col justify-center gap-2 border border-black dark:border-slate-500 rounded-lg'>
             <div className='flex gap-4 items-center'>
-                <img src={ product.image } className='rounded-md' width='200' height='200' alt='product image' />
+                <img src={ product.image } className='rounded-md md:w-[200px] md:h-[200px]' alt='product image' />
             </div>
             <div>
-                <h4 className='text-lg font-medium'>{ product.name }</h4>
+                <h4 className='md:text-lg font-medium'>{ product.name }</h4>
                 <p>${ product.price }</p>
             </div>
             <div className='mt-auto'>

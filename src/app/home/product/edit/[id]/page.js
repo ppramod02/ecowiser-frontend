@@ -28,7 +28,11 @@ export default function EditProduct() {
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(payload)
             });
-            router.push('/home/dashboard');
+
+            if(res.ok) {
+                toast.success('Product updated successfully');
+                router.push('/home/dashboard');
+            }
         } catch (error) {
             console.error(error.message);
         }
